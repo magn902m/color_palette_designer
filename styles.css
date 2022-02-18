@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main > section {
+  display: flex;
+  flex-direction: column;
+  background-color: gainsboro;
+  margin: 1rem;
+  padding: 2rem;
+  border: solid 1px #000;
+  border-radius: 2rem;
+  box-shadow: 2px 2px 10px;
+}
+
+#colorCodes {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.color_box {
+  height: 3rem;
+  width: 6rem;
+  border: solid 1px #000;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px;
+}
