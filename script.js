@@ -7,7 +7,7 @@ const HTML = {};
 function setup() {
   console.log("setup");
   HTML.input = document.querySelector("#colorwheel");
-  HTML.colorCodes = document.querySelector("#colorCodes");
+  HTML.harmony = document.querySelector("#harmony");
   HTML.hexValue = document.querySelector(".hex");
   HTML.rgbValue = document.querySelector(".rgb");
   HTML.cssValue = document.querySelector(".css");
@@ -28,11 +28,12 @@ function setup() {
 // ***** Model *****
 function getColor() {
   HTML.input.addEventListener("input", (elm) => {
-    let pickedColorValue = HTML.input.value;
+    let inputColorValue = HTML.input.value;
+    let harmonyValue = HTML.harmony.value;
     let hexColorValue, rgbColorValue, cssColorValue, hslColorValue;
 
     // HEX
-    hexColorValue = `${pickedColorValue}`;
+    hexColorValue = `${inputColorValue}`;
     // console.log(hexColorValue);
 
     // RGB
@@ -50,12 +51,12 @@ function getColor() {
     // RGB to HEX
     // rgbToHex(rgbColorValue);
 
-    displayColors(hexColorValue, rgbColorValue, cssColorValue, hslColorValue);
+    displayColors(hexColorValue, rgbColorValue, cssColorValue, hslColorValue, harmonyValue);
   });
 }
 
 // ***** View *****
-function displayColors(hexV, rgbV, cssV, hslV) {
+function displayColors(hexV, rgbV, cssV, hslV, harmonyValue) {
   // console.log("displayColors");
   // console.log(hexV, rgbV, cssV, hslV);
   displayColorBox(hexV);
@@ -63,6 +64,20 @@ function displayColors(hexV, rgbV, cssV, hslV) {
   displayRGB(rgbV);
   displayCSS(cssV);
   displayHSL(hslV);
+
+  if (harmonyValue === "0") {
+    displayAnalogous();
+  } else if (harmonyValue === "1") {
+    displayMonochromatic();
+  } else if (harmonyValue === "2") {
+    displayTriad();
+  } else if (harmonyValue === "3") {
+    displayComplementary();
+  } else if (harmonyValue === "4") {
+    displayCompound();
+  } else if (harmonyValue === "5") {
+    displayShades();
+  }
 }
 
 // ***** Controller *****
@@ -146,7 +161,7 @@ function rgbToHSL(rgbObj) {
 
 function displayColorBox(hexV) {
   HTML.colorBox.style.backgroundColor = `${hexV}`;
-  HTML.colorBody.style.backgroundColor = `${hexV}`;
+  //   HTML.colorBody.style.backgroundColor = `${hexV}`;
 }
 
 function displayHEX(hexV) {
@@ -158,7 +173,7 @@ function displayRGB(rgbV) {
 }
 
 function displayCSS(cssV) {
-  console.log(cssV);
+  //   console.log(cssV);
   HTML.cssValue.textContent = `css: rgb(${cssV.r},${cssV.g},${cssV.b})`;
 }
 
@@ -166,4 +181,28 @@ function displayHSL(hslV) {
   // HTML.hslValue.textContent =
   //   "hsl: " + hslV.h.toFixed(0) + "%. " + hslV.s.toFixed(0) + "%. " + hslV.l.toFixed(0) + "%";
   HTML.hslValue.textContent = `hsl: ${hslV.h}, ${hslV.s}, ${hslV.l}`;
+}
+
+function displayAnalogous() {
+  console.log("displayAnalogous");
+}
+
+function displayMonochromatic() {
+  console.log("displayMonochromatic");
+}
+
+function displayTriad() {
+  console.log("displayTriad");
+}
+
+function displayComplementary() {
+  console.log("displayComplementary");
+}
+
+function displayCompound() {
+  console.log("displayCompound");
+}
+
+function displayShades() {
+  console.log("displayShades");
 }
