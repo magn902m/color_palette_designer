@@ -292,24 +292,169 @@ function calcAnalogous(hslObj) {
   return hslArr;
 }
 
-function displayMonochromatic() {
-  console.log("displayMonochromatic");
+function displayMonochromatic(hslObj) {
+  //   console.log("displayMonochromatic");
+  let newHSLObj = calcMonochromatic(hslObj);
+  HTML.color1.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
+  );
+  HTML.color2.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
+  );
+  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
+  HTML.color4.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
+  );
+  HTML.color5.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
+  );
+  calcAllColorValueText(hslObj, newHSLObj);
 }
 
-function displayTriad() {
-  console.log("displayTriad");
+function calcMonochromatic(hslObj) {
+  let hslArr = [];
+  hslArr.push({ h: hslObj.h, s: hslObj.s / 2, l: hslObj.l });
+  hslArr.push({ h: hslObj.h, s: hslObj.s / 3, l: hslObj.l });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l / 2 });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l / 3 });
+  //   console.log(hslArr);
+  return hslArr;
 }
 
-function displayComplementary() {
-  console.log("displayComplementary");
+function displayTriad(hslObj) {
+  //   console.log("displayTriad");
+  let newHSLObj = calcTriad(hslObj);
+  HTML.color1.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
+  );
+  HTML.color2.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
+  );
+  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
+  HTML.color4.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
+  );
+  HTML.color5.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
+  );
+  calcAllColorValueText(hslObj, newHSLObj);
 }
 
-function displayCompound() {
+function calcTriad(hslObj) {
+  let hslArr = [];
+  hslArr.push({ h: hslObj.h + 60, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h + 120, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h + 180, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h + 240, s: hslObj.s, l: hslObj.l });
+  //   console.log(hslArr);
+  return hslArr;
+}
+
+function displayComplementary(hslObj) {
+  //   console.log("displayComplementary");
+  let newHSLObj = calcComplementary(hslObj);
+  HTML.color1.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
+  );
+  HTML.color2.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
+  );
+  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
+  HTML.color4.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
+  );
+  HTML.color5.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
+  );
+  calcAllColorValueText(hslObj, newHSLObj);
+}
+
+function calcComplementary(hslObj) {
+  let hslArr = [];
+  hslArr.push({ h: hslObj.h - 90, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h - 120, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h - 180, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h - 240, s: hslObj.s, l: hslObj.l });
+  //   console.log(hslArr);
+  return hslArr;
+}
+
+function displayCompound(hslObj) {
   console.log("displayCompound");
+  let newHSLObj = calcCompound(hslObj);
+  HTML.color1.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
+  );
+  HTML.color2.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
+  );
+  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
+  HTML.color4.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
+  );
+  HTML.color5.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
+  );
+  calcAllColorValueText(hslObj, newHSLObj);
 }
 
-function displayShades() {
-  console.log("displayShades");
+function calcCompound(hslObj) {
+  let hslArr = [];
+  hslArr.push({ h: hslObj.h / 2, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / -180, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / 4, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / -240, s: hslObj.s, l: hslObj.l });
+  //   console.log(hslArr);
+  return hslArr;
+}
+
+function displayShades(hslObj) {
+  //   console.log("displayShades");
+  let newHSLObj = calcShades(hslObj);
+  HTML.color1.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
+  );
+  HTML.color2.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
+  );
+  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
+  HTML.color4.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
+  );
+  HTML.color5.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
+  );
+  calcAllColorValueText(hslObj, newHSLObj);
+}
+
+function calcShades(hslObj) {
+  let hslArr = [];
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l / 0.5 });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l / 1 });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l / 1.5 });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l / 2 });
+  //   console.log(hslArr);
+  return hslArr;
 }
 
 // *** Harmonies value in text ***
@@ -364,28 +509,4 @@ function displayText(hslObj, newHSLObj) {
       )}, ${Math.floor(hslV.s)}, ${Math.floor(hslV.l)}`;
     }
   });
-}
-
-function color1Text(newHSLObj) {
-  let hexV, rgbV, cssV, hslV;
-  // HSL
-  hslV = newHSLObj[0];
-  // RGB
-  rgbV = hslToRGB(hslV);
-  // HEX
-  hexV = rgbToHex(rgbV);
-  // console.log(hexV);
-  // CSS
-  cssV = rgbToCSS(rgbV);
-
-  document.querySelector(`.color_1 p`).textContent = `hex: ${hexV}`;
-  document.querySelector(
-    ".color_1 p:nth-child(2)"
-  ).textContent = `rgb: ${rgbV.r}, ${rgbV.g}, ${rgbV.b}`;
-  document.querySelector(
-    ".color_1 p:nth-child(3)"
-  ).textContent = `css: rgb(${cssV.r},${cssV.g},${cssV.b})`;
-  document.querySelector(
-    ".color_1 p:last-child"
-  ).textContent = `hsl: ${hslV.h}, ${hslV.s}, ${hslV.l}`;
 }
