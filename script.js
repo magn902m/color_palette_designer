@@ -134,7 +134,7 @@ function rgbToHex(rgbObj) {
     ("0" + g.toString(16)).slice(-2) +
     ("0" + b.toString(16)).slice(-2);
   // console.log(`#${hexCode}`);
-  return `#${hexCode}`;
+  return hexCode;
 }
 
 function rgbToHSL(rgbObj) {
@@ -187,6 +187,9 @@ function hslToRGB(hslObj) {
   let h = hslObj.h,
     s = hslObj.s,
     l = hslObj.l;
+  //   let h = hslObj.h;
+  //   let s = hslObj.s;
+  //   let l = hslObj.l;
 
   h = h;
   s = s / 100;
@@ -245,7 +248,7 @@ function displayRGB(rgbV) {
 
 function displayCSS(cssV) {
   //   console.log(cssV);
-  HTML.cssValue.textContent = `css: rgb(${cssV.r},${cssV.g},${cssV.b})`;
+  HTML.cssValue.textContent = `css: rgb(${cssV.r}, ${cssV.g}, ${cssV.b})`;
 }
 
 function displayHSL(hslV) {
@@ -310,26 +313,72 @@ function displayShades() {
 }
 
 // *** Harmonies value in text ***
-
 function calcAllColorValueText(hslObj, newHSLObj) {
+  //   console.log(hslObj);
+  //   console.log(newHSLObj);
+
+  //   color1Text(newHSLObj);
+  displayText(hslObj, newHSLObj);
+}
+
+function displayText(hslObj, newHSLObj) {
+  let hexV, rgbV, cssV, hslV;
+  //   let hslObj;
   console.log(newHSLObj);
 
-  color1Text(newHSLObj);
+  let colorVTxt = document.querySelectorAll(`#color_harmonies [class*="color_txt"] > div > p`);
+
+  colorVTxt.forEach((elm) => {
+    // console.log(newHSLObj);
+    // console.log(elm);
+    for (let i = 1; i <= 5; i++) {
+      if (i === 1 || i === 2) {
+        hslV = newHSLObj[i - 1];
+        console.log(`Color_${i}: `, newHSLObj[i - 1]);
+        rgbV = hslToRGB(hslV);
+        hexV = rgbToHex(rgbV);
+        cssV = rgbToCSS(rgbV);
+      } else if (i === 3) {
+        console.log(`Color_3 "User":`, hslObj);
+        hslV = hslObj;
+        rgbV = hslToRGB(hslV);
+        hexV = rgbToHex(rgbV);
+        cssV = rgbToCSS(rgbV);
+      } else if (i === 4 || i === 5) {
+        hslV = newHSLObj[i - 2];
+        console.log(`Color_${i}: `, newHSLObj[i - 2]);
+        rgbV = hslToRGB(hslV);
+        hexV = rgbToHex(rgbV);
+        cssV = rgbToCSS(rgbV);
+      }
+
+      document.querySelector(`.color_${i} p`).textContent = `hex: #${hexV}`;
+      document.querySelector(
+        `.color_${i} p:nth-child(2)`
+      ).textContent = `rgb: ${rgbV.r}, ${rgbV.g}, ${rgbV.b}`;
+      document.querySelector(
+        `.color_${i} p:nth-child(3)`
+      ).textContent = `css: rgb(${cssV.r},${cssV.g},${cssV.b})`;
+      document.querySelector(`.color_${i} p:last-child`).textContent = `hsl: ${Math.floor(
+        hslV.h
+      )}, ${Math.floor(hslV.s)}, ${Math.floor(hslV.l)}`;
+    }
+  });
 }
 
 function color1Text(newHSLObj) {
   let hexV, rgbV, cssV, hslV;
-  //   console.log(newHSLObj);
   // HSL
   hslV = newHSLObj[0];
   // RGB
   rgbV = hslToRGB(hslV);
   // HEX
   hexV = rgbToHex(rgbV);
+  // console.log(hexV);
   // CSS
   cssV = rgbToCSS(rgbV);
 
-  document.querySelector(".color_1 p").textContent = `hex: ${hexV}`;
+  document.querySelector(`.color_1 p`).textContent = `hex: ${hexV}`;
   document.querySelector(
     ".color_1 p:nth-child(2)"
   ).textContent = `rgb: ${rgbV.r}, ${rgbV.g}, ${rgbV.b}`;
