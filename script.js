@@ -184,6 +184,10 @@ function rgbToHSL(rgbObj) {
 }
 
 function hslToRGB(hslObj) {
+  let h = hslObj.h,
+    s = hslObj.s,
+    l = hslObj.l;
+
   h = h;
   s = s / 100;
   l = l / 100;
@@ -250,6 +254,8 @@ function displayHSL(hslV) {
   HTML.hslValue.textContent = `hsl: ${hslV.h}, ${hslV.s}, ${hslV.l}`;
 }
 
+// *** Harmonies ***
+
 function displayAnalogous(hslObj) {
   //   console.log("displayAnalogous");
   let newHSLObj = calcAnalogous(hslObj);
@@ -270,6 +276,7 @@ function displayAnalogous(hslObj) {
     "background-color",
     `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
   );
+  calcAllColorValueText(hslObj, newHSLObj);
 }
 
 function calcAnalogous(hslObj) {
@@ -278,7 +285,7 @@ function calcAnalogous(hslObj) {
   hslArr.push({ h: hslObj.h / 4, s: hslObj.s, l: hslObj.l });
   hslArr.push({ h: hslObj.h / 6, s: hslObj.s, l: hslObj.l });
   hslArr.push({ h: hslObj.h / 8, s: hslObj.s, l: hslObj.l });
-  console.log(hslArr);
+  //   console.log(hslArr);
   return hslArr;
 }
 
@@ -300,4 +307,36 @@ function displayCompound() {
 
 function displayShades() {
   console.log("displayShades");
+}
+
+// *** Harmonies value in text ***
+
+function calcAllColorValueText(hslObj, newHSLObj) {
+  console.log(newHSLObj);
+
+  color1Text(newHSLObj);
+}
+
+function color1Text(newHSLObj) {
+  let hexV, rgbV, cssV, hslV;
+  //   console.log(newHSLObj);
+  // HSL
+  hslV = newHSLObj[0];
+  // RGB
+  rgbV = hslToRGB(hslV);
+  // HEX
+  hexV = rgbToHex(rgbV);
+  // CSS
+  cssV = rgbToCSS(rgbV);
+
+  document.querySelector(".color_1 p").textContent = `hex: ${hexV}`;
+  document.querySelector(
+    ".color_1 p:nth-child(2)"
+  ).textContent = `rgb: ${rgbV.r}, ${rgbV.g}, ${rgbV.b}`;
+  document.querySelector(
+    ".color_1 p:nth-child(3)"
+  ).textContent = `css: rgb(${cssV.r},${cssV.g},${cssV.b})`;
+  document.querySelector(
+    ".color_1 p:last-child"
+  ).textContent = `hsl: ${hslV.h}, ${hslV.s}, ${hslV.l}`;
 }
