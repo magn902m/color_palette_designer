@@ -32,22 +32,6 @@ function setup() {
   // console.log(HTML);
 }
 
-// --- Create random color ---
-function calcRandom(min, max) {
-  const num = Math.floor(Math.random() * (max - min)) + min;
-  return num;
-}
-
-function randomColor() {
-  return "rgb(" + calcRandom(0, 255) + ", " + calcRandom(0, 255) + ", " + calcRandom(0, 255) + ")";
-}
-
-function setRandomColor() {
-  const newColor = randomColor();
-  HTML.colorBox.style.setProperty("background-color", newColor);
-  HTML.input.style.setProperty("value", newColor);
-}
-
 // ***** Model *****
 function getColor() {
   setRandomColor();
@@ -105,6 +89,22 @@ function displayColors(hexV, rgbV, cssV, hslV, harmonyValue) {
 }
 
 // ***** Controller *****
+// --- Create random color ---
+function setRandomColor() {
+  const newColor = randomColor();
+  HTML.colorBox.style.setProperty("background-color", newColor);
+  HTML.input.style.setProperty("value", newColor);
+}
+
+function calcRandom(min, max) {
+  const num = Math.floor(Math.random() * (max - min)) + min;
+  return num;
+}
+
+function randomColor() {
+  return "rgb(" + calcRandom(0, 255) + ", " + calcRandom(0, 255) + ", " + calcRandom(0, 255) + ")";
+}
+
 function hexToRGB(hexCode) {
   // console.log("hexToRGB");
   let r = parseInt(hexCode.substring(1, 3), 16);
