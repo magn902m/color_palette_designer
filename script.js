@@ -1,5 +1,7 @@
 `use strict`;
 
+// Info about hsl: https://en.wikipedia.org/wiki/HSL_and_HSV
+
 window.addEventListener("DOMContentLoaded", setup);
 
 const HTML = {};
@@ -14,11 +16,11 @@ function setup() {
   HTML.hslValue = document.querySelector(".hsl");
   HTML.colorBox = document.querySelector(".color_box");
   HTML.colorBody = document.querySelector("body");
-  HTML.color1 = document.querySelector(".color_1");
-  HTML.color2 = document.querySelector(".color_2");
-  HTML.color3 = document.querySelector(".color_3");
-  HTML.color4 = document.querySelector(".color_4");
-  HTML.color5 = document.querySelector(".color_5");
+  HTML.color1 = document.querySelector(".color_1 div");
+  HTML.color2 = document.querySelector(".color_2 div");
+  HTML.color3 = document.querySelector(".color_3 div");
+  HTML.color4 = document.querySelector(".color_4 div");
+  HTML.color5 = document.querySelector(".color_5 div");
 
   HTML.hexValue.textContent = `hex: ${HTML.input.value}`;
   HTML.rgbValue.textContent = "rgb: 255, 255, 255";
@@ -249,21 +251,33 @@ function displayHSL(hslV) {
 }
 
 function displayAnalogous(hslObj) {
-  console.log("displayAnalogous");
-
+  //   console.log("displayAnalogous");
   let newHSLObj = calcAnalogous(hslObj);
   HTML.color1.style.setProperty(
     "background-color",
     `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
   );
+  HTML.color2.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
+  );
+  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
+  HTML.color4.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
+  );
+  HTML.color5.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
+  );
 }
 
 function calcAnalogous(hslObj) {
   let hslArr = [];
-  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
-  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
-  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
-  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / 2, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / 4, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / 6, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h / 8, s: hslObj.s, l: hslObj.l });
   console.log(hslArr);
   return hslArr;
 }
