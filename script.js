@@ -14,6 +14,11 @@ function setup() {
   HTML.hslValue = document.querySelector(".hsl");
   HTML.colorBox = document.querySelector(".color_box");
   HTML.colorBody = document.querySelector("body");
+  HTML.color1 = document.querySelector(".color_1");
+  HTML.color2 = document.querySelector(".color_2");
+  HTML.color3 = document.querySelector(".color_3");
+  HTML.color4 = document.querySelector(".color_4");
+  HTML.color5 = document.querySelector(".color_5");
 
   HTML.hexValue.textContent = `hex: ${HTML.input.value}`;
   HTML.rgbValue.textContent = "rgb: 255, 255, 255";
@@ -83,17 +88,17 @@ function displayColors(hexV, rgbV, cssV, hslV, harmonyValue) {
   displayHSL(hslV);
 
   if (harmonyValue === "0") {
-    displayAnalogous();
+    displayAnalogous(hslV);
   } else if (harmonyValue === "1") {
-    displayMonochromatic();
+    displayMonochromatic(hslV);
   } else if (harmonyValue === "2") {
-    displayTriad();
+    displayTriad(hslV);
   } else if (harmonyValue === "3") {
-    displayComplementary();
+    displayComplementary(hslV);
   } else if (harmonyValue === "4") {
-    displayCompound();
+    displayCompound(hslV);
   } else if (harmonyValue === "5") {
-    displayShades();
+    displayShades(hslV);
   }
 }
 
@@ -245,10 +250,23 @@ function displayHSL(hslV) {
 
 function displayAnalogous(hslObj) {
   console.log("displayAnalogous");
+
   let newHSLObj = calcAnalogous(hslObj);
+  HTML.color1.style.setProperty(
+    "background-color",
+    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
+  );
 }
 
-function calcAnalogous() {}
+function calcAnalogous(hslObj) {
+  let hslArr = [];
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
+  hslArr.push({ h: hslObj.h, s: hslObj.s, l: hslObj.l });
+  console.log(hslArr);
+  return hslArr;
+}
 
 function displayMonochromatic() {
   console.log("displayMonochromatic");
