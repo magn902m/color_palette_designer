@@ -73,19 +73,7 @@ function displayColors(hexV, rgbV, cssV, hslV, harmonyValue) {
   displayCSS(cssV);
   displayHSL(hslV);
 
-  if (harmonyValue === "0") {
-    displayAnalogous(hslV);
-  } else if (harmonyValue === "1") {
-    displayMonochromatic(hslV);
-  } else if (harmonyValue === "2") {
-    displayTriad(hslV);
-  } else if (harmonyValue === "3") {
-    displayComplementary(hslV);
-  } else if (harmonyValue === "4") {
-    displayCompound(hslV);
-  } else if (harmonyValue === "5") {
-    displayShades(hslV);
-  }
+  displayHarmony(hslV, harmonyValue);
 }
 
 // ***** Controller *****
@@ -259,9 +247,23 @@ function displayHSL(hslV) {
 
 // *** Harmonies ***
 
-function displayAnalogous(hslObj) {
-  //   console.log("displayAnalogous");
-  let newHSLObj = calcAnalogous(hslObj);
+function displayHarmony(hslObj, harmonyValue) {
+  let newHSLObj;
+
+  if (harmonyValue === "0") {
+    newHSLObj = calcAnalogous(hslObj);
+  } else if (harmonyValue === "1") {
+    newHSLObj = calcMonochromatic(hslObj);
+  } else if (harmonyValue === "2") {
+    newHSLObj = calcTriad(hslObj);
+  } else if (harmonyValue === "3") {
+    newHSLObj = calcComplementary(hslObj);
+  } else if (harmonyValue === "4") {
+    newHSLObj = calcCompound(hslObj);
+  } else if (harmonyValue === "5") {
+    newHSLObj = calcShades(hslObj);
+  }
+
   HTML.color1.style.setProperty(
     "background-color",
     `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
@@ -282,6 +284,7 @@ function displayAnalogous(hslObj) {
   calcAllColorValueText(hslObj, newHSLObj);
 }
 
+// *** Calc harmonies values in hsl ***
 function calcAnalogous(hslObj) {
   let hslArr = [];
   hslArr.push({ h: hslObj.h / 2, s: hslObj.s, l: hslObj.l });
@@ -290,29 +293,6 @@ function calcAnalogous(hslObj) {
   hslArr.push({ h: hslObj.h / 8, s: hslObj.s, l: hslObj.l });
   //   console.log(hslArr);
   return hslArr;
-}
-
-function displayMonochromatic(hslObj) {
-  //   console.log("displayMonochromatic");
-  let newHSLObj = calcMonochromatic(hslObj);
-  HTML.color1.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
-  );
-  HTML.color2.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
-  );
-  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
-  HTML.color4.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
-  );
-  HTML.color5.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
-  );
-  calcAllColorValueText(hslObj, newHSLObj);
 }
 
 function calcMonochromatic(hslObj) {
@@ -325,29 +305,6 @@ function calcMonochromatic(hslObj) {
   return hslArr;
 }
 
-function displayTriad(hslObj) {
-  //   console.log("displayTriad");
-  let newHSLObj = calcTriad(hslObj);
-  HTML.color1.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
-  );
-  HTML.color2.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
-  );
-  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
-  HTML.color4.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
-  );
-  HTML.color5.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
-  );
-  calcAllColorValueText(hslObj, newHSLObj);
-}
-
 function calcTriad(hslObj) {
   let hslArr = [];
   hslArr.push({ h: hslObj.h + 60, s: hslObj.s, l: hslObj.l });
@@ -356,29 +313,6 @@ function calcTriad(hslObj) {
   hslArr.push({ h: hslObj.h + 240, s: hslObj.s, l: hslObj.l });
   //   console.log(hslArr);
   return hslArr;
-}
-
-function displayComplementary(hslObj) {
-  //   console.log("displayComplementary");
-  let newHSLObj = calcComplementary(hslObj);
-  HTML.color1.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
-  );
-  HTML.color2.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
-  );
-  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
-  HTML.color4.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
-  );
-  HTML.color5.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
-  );
-  calcAllColorValueText(hslObj, newHSLObj);
 }
 
 function calcComplementary(hslObj) {
@@ -391,29 +325,6 @@ function calcComplementary(hslObj) {
   return hslArr;
 }
 
-function displayCompound(hslObj) {
-  console.log("displayCompound");
-  let newHSLObj = calcCompound(hslObj);
-  HTML.color1.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
-  );
-  HTML.color2.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
-  );
-  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
-  HTML.color4.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
-  );
-  HTML.color5.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
-  );
-  calcAllColorValueText(hslObj, newHSLObj);
-}
-
 function calcCompound(hslObj) {
   let hslArr = [];
   hslArr.push({ h: hslObj.h / 2, s: hslObj.s, l: hslObj.l });
@@ -422,29 +333,6 @@ function calcCompound(hslObj) {
   hslArr.push({ h: hslObj.h / -240, s: hslObj.s, l: hslObj.l });
   //   console.log(hslArr);
   return hslArr;
-}
-
-function displayShades(hslObj) {
-  //   console.log("displayShades");
-  let newHSLObj = calcShades(hslObj);
-  HTML.color1.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[0].h}, ${newHSLObj[0].s}%, ${newHSLObj[0].l}%)`
-  );
-  HTML.color2.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[1].h}, ${newHSLObj[1].s}%, ${newHSLObj[1].l}%)`
-  );
-  HTML.color3.style.setProperty("background-color", `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`);
-  HTML.color4.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[2].h}, ${newHSLObj[2].s}%, ${newHSLObj[2].l}%)`
-  );
-  HTML.color5.style.setProperty(
-    "background-color",
-    `hsl(${newHSLObj[3].h}, ${newHSLObj[3].s}%, ${newHSLObj[3].l}%)`
-  );
-  calcAllColorValueText(hslObj, newHSLObj);
 }
 
 function calcShades(hslObj) {
